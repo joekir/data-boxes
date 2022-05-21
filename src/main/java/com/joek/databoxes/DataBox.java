@@ -1,24 +1,63 @@
 package com.joek.databoxes;
 
-import manifold.ext.rt.api;
+import manifold.ext.rt.api.ComparableUsing;
 
-// https://javadoc.io/static/systems.manifold/manifold-ext-rt/2020.1.51/manifold/ext/rt/api/Structural.html
-@Structural
 public class DataBox {
-    private int num;
+    public static class Box<T extends Number> implements ComparableUsing<Box<T>> {
+        private T inner;
 
-    public DataBox plus(int that) {
-        return new DataBox(this.getNum() + that);
-    } 
+        private static Number addNumbers(Number a, Number b) {
+            if (a instanceof Double || b instanceof Double) {
+                return a.doubleValue() + b.doubleValue();
+            } else if (a instanceof Float || b instanceof Float) {
+                return a.floatValue() + b.floatValue();
+            } else if (a instanceof Long || b instanceof Long) {
+                return a.longValue() + b.longValue();
+            } else {
+                return a.intValue() + b.intValue();
+            }
+        }
 
-    public DataBox(int num){
-        this.num = num;
+        private static Number subtractNumbers(Number a, Number b) {
+            if (a instanceof Double || b instanceof Double) {
+                return a.doubleValue() - b.doubleValue();
+            } else if (a instanceof Float || b instanceof Float) {
+                return a.floatValue() - b.floatValue();
+            } else if (a instanceof Long || b instanceof Long) {
+                return a.longValue() - b.longValue();
+            } else {
+                return a.intValue() - b.intValue();
+            }
+        }
+
+        public Box(T inner) {
+            this.inner = inner;
+        }
+
+        public T getInner() {
+            return this.inner;
+        }
+
+        // operator '+' overload
+        @SuppressWarnings("unused")
+        public Box plus(T that) {
+            return new Box(addNumbers(this.inner, that));
+        }
+
+        // operator '-' overload
+        @SuppressWarnings("unused")
+        public Box minus(int that) {
+            return new Box(subtractNumbers(this.inner, that));
+        }
+
+        @Override
+        public int compareTo(Box that) {
+            return (int) subtractNumbers(this.inner, that.inner);
+        }
+
+        @Override
+        public EqualityMode equalityMode() {
+            return EqualityMode.CompareTo;
+        }
     }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
+}

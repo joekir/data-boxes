@@ -1,12 +1,11 @@
 package com.joek.databoxes;
 
+import static com.joek.databoxes.DataBox.*;
+
 public class Main {
 	public static void main (String[] args) {
-		System.out.println("Hello, World.");
-
-		DataBox foo = new DataBox(10);
-//		Databox bar = foo + 3;
-
-		System.out.println(foo.getNum());
+		Box<Integer> foo = new Box<>(10);
+		System.out.println((foo + 50).getInner());
 	}
 }
+
