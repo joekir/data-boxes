@@ -4,6 +4,7 @@ import manifold.ext.rt.api.ComparableUsing;
 
 public class DataBox {
     public static class Box<T extends Number> implements ComparableUsing<Box<T>> {
+        // Underlying raw data
         private T inner;
 
         private static Number addNumbers(Number a, Number b) {
@@ -40,14 +41,18 @@ public class DataBox {
 
         // operator '+' overload
         @SuppressWarnings("unused")
-        public Box plus(T that) {
-            return new Box(addNumbers(this.inner, that));
+        public Box<T> plus(T that) {
+            @SuppressWarnings("unchecked")
+            Box<T> result = new Box<T>((T) addNumbers(this.inner, that));
+            return result;
         }
 
         // operator '-' overload
         @SuppressWarnings("unused")
-        public Box minus(int that) {
-            return new Box(subtractNumbers(this.inner, that));
+        public Box<T> minus(int that) {
+            @SuppressWarnings("unchecked")
+            Box<T> result = new Box<T>((T) subtractNumbers(this.inner, that));
+            return result;
         }
 
         @Override
