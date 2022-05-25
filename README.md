@@ -118,7 +118,7 @@ Trying out with Java firstly due to the ease of runtime introspection.
 | Approach  | Link  | Notes   |
 |---|---|---|
 | Using manifold.systems to extend classes at compile time | [manifold.systems](https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-ext#arithmetic-operators)  | It does work, though it could be a lot of maintainence to do these wrappers for all basic data classes |
-| Dynamic Proxy Classes | [Core JavaSE] (https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/proxy.html) | Only works on interfaces, stuff like [String](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html) only implements `CharSequence` which is insufficient coverage |
+| Dynamic Proxy Classes | [Core JavaSE](https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/proxy.html) | Only works on interfaces, stuff like [String](https://docs.oracle.com/javase/9/docs/api/java/lang/String.html) only implements `CharSequence` which is insufficient coverage |
 | Javassist | [ProxyFactory](https://www.javassist.org/html/javassist/util/proxy/ProxyFactory.html) | Works on classes, not just interfaces, however cannot intercept final classes e.g.`String`, `Integer`, which is exactly what we wanted it to do. |
 
 ## Building 
