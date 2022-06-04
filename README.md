@@ -125,6 +125,6 @@ Trying out with Java firstly due to the ease of runtime introspection.
 
 _TODO: need to figure out how to use Bazel, but not right now..._
 
-```
-mvn compile exec:java -Dexec.mainClass="com.joek.databoxes.Main"
+``
+mvn clean compile exec:java -Dexec.mainClass="com.joek.databoxes.Main"
 ```
