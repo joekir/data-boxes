@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all
-# Edit at https://www.gitignore.io/?templates=go,vim,java,maven,bazel,intellij+all
+# Created by https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=go,vim,java,maven,bazel,intellij+all,visualstudiocode
 
 ### Bazel ###
 # gitignore template for Bazel build system
@@ -181,4 +181,16 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all,visualstudiocode
