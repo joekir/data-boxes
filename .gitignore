@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/vim,java,maven,bazel,intellij+all
-# Edit at https://www.gitignore.io/?templates=vim,java,maven,bazel,intellij+all
+# Created by https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all
+# Edit at https://www.gitignore.io/?templates=go,vim,java,maven,bazel,intellij+all
 
 ### Bazel ###
 # gitignore template for Bazel build system
@@ -9,6 +9,27 @@
 # Ignore all bazel-* symlinks. There is no full list since this can change
 # based on the name of the directory bazel is cloned into.
 /bazel-*
+
+### Go ###
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+### Go Patch ###
+/vendor/
+/Godeps/
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
@@ -160,4 +181,4 @@ tags
 # Persistent undo
 [._]*.un~
 
-# End of https://www.gitignore.io/api/vim,java,maven,bazel,intellij+all
+# End of https://www.gitignore.io/api/go,vim,java,maven,bazel,intellij+all

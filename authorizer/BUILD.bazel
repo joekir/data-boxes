@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "authorizer_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/joekir/data-boxes/authorizer",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "authorizer",
+    embed = [":authorizer_lib"],
+    visibility = ["//visibility:public"],
+)
