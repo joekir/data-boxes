@@ -1,0 +1,29 @@
+java_plugin(
+    name = "manifold_plugin",
+    deps = [
+        "@maven//:systems_manifold_manifold_ext",
+        "@maven//:systems_manifold_manifold_ext_rt",
+    ],
+)
+
+java_library(
+    name = "boxes",
+    srcs = glob(["src/main/java/**/*.java"]),
+    javacopts = [
+        # http://manifold.systems/docs.html#download
+        "'-Xplugin:Manifold'",
+    ],
+    plugins = [
+        ":manifold_plugin",
+    ],
+    deps = [
+        "@maven//:systems_manifold_manifold_ext",
+        "@maven//:systems_manifold_manifold_ext_rt",
+    ],
+)
+
+java_binary(
+    name = "example",
+    main_class = "com.joek.databoxes.Main",
+    runtime_deps = [":boxes"],
+)
