@@ -111,7 +111,7 @@ Examples of where this is done is before sharing to the user-interface, to the l
 All datastores should not accept `raw-data` (unless there's some intake flow elsewhere) only `wrapped-data` so ownership, privacy metadata can be upheld.
 Operations between 2 pieces of wrapped-data in a service (depending upon policy) should result in the union of their metadata e.g. if you are manipulating wrapped _social insurance number_ with _address_ then the resulting wrapped data would have both of those attributes.
 
-## Implemenation(s)
+## Implementation(s)
 
 Trying out with Java firstly due to the ease of runtime introspection.
 
@@ -123,8 +123,7 @@ Trying out with Java firstly due to the ease of runtime introspection.
 
 ## Building 
 
-_TODO: need to figure out how to use Bazel, but not right now..._
-
-``
-mvn clean compile exec:java -Dexec.mainClass="com.joek.databoxes.Main"
+```
+$ bazel clean
+$ bazel run //java-wrappers:example
 ```

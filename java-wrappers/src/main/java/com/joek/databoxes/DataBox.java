@@ -40,7 +40,7 @@ public class DataBox {
         }
 
         // operator '+' overload
-        @SuppressWarnings("unused")
+        // @SuppressWarnings("unused") TODO: re-add later
         public Box<T> plus(T that) {
             @SuppressWarnings("unchecked")
             Box<T> result = new Box<T>((T) addNumbers(this.inner, that));
@@ -48,7 +48,7 @@ public class DataBox {
         }
 
         // operator '-' overload
-        @SuppressWarnings("unused")
+        // @SuppressWarnings("unused") TODO: re-add later
         public Box<T> minus(int that) {
             @SuppressWarnings("unchecked")
             Box<T> result = new Box<T>((T) subtractNumbers(this.inner, that));
