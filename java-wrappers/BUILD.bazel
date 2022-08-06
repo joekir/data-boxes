@@ -17,6 +17,9 @@ java_library(
         ":manifold_plugin",
     ],
     deps = [
+        "@maven//:io_grpc_grpc_netty_shaded",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
         "@maven//:systems_manifold_manifold_ext",
         "@maven//:systems_manifold_manifold_ext_rt",
     ],
@@ -25,5 +28,10 @@ java_library(
 java_binary(
     name = "example",
     main_class = "com.joek.databoxes.Main",
-    runtime_deps = [":boxes"],
+    runtime_deps = [
+        ":boxes",
+        "@maven//:io_grpc_grpc_netty_shaded",
+        "@maven//:io_grpc_grpc_protobuf",
+        "@maven//:io_grpc_grpc_stub",
+    ],
 )

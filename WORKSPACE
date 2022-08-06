@@ -28,12 +28,20 @@ rules_jvm_external_setup()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
+grpc_version = "1.47.0"
+
+manifold_version = "2022.1.14"
+
 maven_install(
     name = "maven",
     artifacts = [
         # TODO: refine later https://github.com/bazelbuild/rules_jvm_external#compile-only-dependencies
-        "systems.manifold:manifold-ext-rt:2022.1.14",
-        "systems.manifold:manifold-ext:2022.1.14",
+        "systems.manifold:manifold-ext-rt:{version}".format(version = manifold_version),
+        "systems.manifold:manifold-ext:{version}".format(version = manifold_version),
+        # this follows https://github.com/grpc/grpc-java#download
+        "io.grpc:grpc-netty-shaded:{version}".format(version = grpc_version),
+        "io.grpc:grpc-protobuf:{version}".format(version = grpc_version),
+        "io.grpc:grpc-stub:{version}".format(version = grpc_version),
     ],
     fail_on_missing_checksum = True,
     fetch_sources = False,

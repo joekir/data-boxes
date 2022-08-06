@@ -1,7 +1,5 @@
 # data boxes
 
-
-
 ## Overview
 
 **What is the problem?**
@@ -125,5 +123,17 @@ Trying out with Java firstly due to the ease of runtime introspection.
 
 ```
 $ bazel clean
+$ bazel build //...
+```
+
+## Running
+
+#### Running the golang authorization service
+```
+$ bazel run //authorizer:authorizer
+```
+
+#### Running the Java client code
+```
 $ bazel run //java-wrappers:example
 ```
