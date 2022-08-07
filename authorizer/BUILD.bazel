@@ -2,7 +2,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary")
 
 go_binary(
     name = "authorizer",
-    srcs = ["main.go"],
+    srcs = ["server.go"],
     importpath = "github.com/joekir/data-boxes/authorizer",
     visibility = ["//visibility:public"],
     deps = [

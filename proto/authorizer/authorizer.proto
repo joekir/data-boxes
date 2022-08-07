@@ -1,15 +1,19 @@
 syntax = "proto3";
-
-import "google/protobuf/wrappers.proto";
-
 package authorizer;
 
+//import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/joekir/data-boxes/proto/authorizer";
 option java_multiple_files = true;
-option java_package = "com.joekir.data-boxes.authorizer";
-option java_outer_classname = "authorizerProto";
+option java_package = "com.joekir.databoxes.authorizer";
+option java_outer_classname = "AuthorizerProto";
 
 service Authorizer {
-  rpc IsAuthorized(AuthRequest) returns (google.protobuf.BoolValue) {}
+  rpc IsAuthorized(AuthRequest) returns (AuthResponse) {}
+}
+
+message AuthResponse {
+  string result = 1;
 }
 
 message AuthRequest {
@@ -17,3 +21,4 @@ message AuthRequest {
   string dataType = 2;
   string verb = 4;
 }
+

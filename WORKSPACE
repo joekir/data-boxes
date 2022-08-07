@@ -1,10 +1,27 @@
 workspace(name = "data-boxes")
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+protobuf_version = "21.1"
+
+protobuf_sha = "f1a83673cbcaff6346a8fba87a9c02c0f943a4a696b6c7d1b71586d97609db12"
+
+# requirement of 'com_github_bazelbuild_buildtools'
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = protobuf_sha,
+    strip_prefix = "protobuf-{version}".format(version = protobuf_version),
+    url = "https://github.com/protocolbuffers/protobuf/archive/v{version}.tar.gz".format(version = protobuf_version),
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "PROTOBUF_MAVEN_ARTIFACTS")
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
 #######################
 # JAVA SUPPORT
 #######################
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 rules_jvm_external_version = "4.2"
 
@@ -26,11 +43,35 @@ load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
 
 rules_jvm_external_setup()
 
-load("@rules_jvm_external//:defs.bzl", "maven_install")
+http_archive(
+    name = "io_grpc_grpc_java",
+    sha256 = "f2a7ab5148a1f6b451db13c5eea1185341c681c031dc775a973775e1c5d1afcb",
+    strip_prefix = "grpc-java-{version}".format(version = "1.48.1"),
+    url = "https://github.com/grpc/grpc-java/archive/v{version}.zip".format(version = "1.48.1"),
+)
+
+# joek: this approach seems to not work, probably ends in the same error :(
+#IO_GRPC_GRPC_JAVA_ARTIFACTS = [
+#    "org.apache.tomcat:annotations-api:6.0.53",
+#    "io.netty:netty-tcnative-boringssl-static:2.0.53.Final",
+#    "io.netty:netty-transport-native-unix-common:4.1.72.Final",
+#    "io.netty:netty-transport-native-epoll:jar:linux-x86_64:4.1.77.Final",
+#    "io.netty:netty-codec-http2:4.1.77.Final",
+#]
+
+load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS")
+load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS")
+load("@io_grpc_grpc_java//:repositories.bzl", "grpc_java_repositories")
+
+# Fu on how to exclude stuff from here
+# https://github.com/google/startup-os/blob/master/WORKSPACE#L25
+grpc_java_repositories()
 
 grpc_version = "1.47.0"
 
-manifold_version = "2022.1.14"
+manifold_version = "2022.1.19"
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
     name = "maven",
@@ -39,16 +80,22 @@ maven_install(
         "systems.manifold:manifold-ext-rt:{version}".format(version = manifold_version),
         "systems.manifold:manifold-ext:{version}".format(version = manifold_version),
         # this follows https://github.com/grpc/grpc-java#download
-        "io.grpc:grpc-netty-shaded:{version}".format(version = grpc_version),
+        #        "io.grpc:grpc-netty-shaded:{version}".format(version = grpc_version),
         "io.grpc:grpc-protobuf:{version}".format(version = grpc_version),
         "io.grpc:grpc-stub:{version}".format(version = grpc_version),
-    ],
+    ] + IO_GRPC_GRPC_JAVA_ARTIFACTS + PROTOBUF_MAVEN_ARTIFACTS,
     fail_on_missing_checksum = True,
-    fetch_sources = False,
+    generate_compat_repositories = True,
+    override_targets = IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS,
     repositories = [
         "https://repo1.maven.org/maven2",
+        "https://repo.maven.apache.org/maven2/",
     ],
 )
+
+load("@maven//:compat.bzl", "compat_repositories")
+
+compat_repositories()
 
 ######################
 # Golang
@@ -123,22 +170,6 @@ gazelle_dependencies()
 # OTHER
 ######################
 
-protobuf_version = "21.1"
-
-protobuf_sha = "f1a83673cbcaff6346a8fba87a9c02c0f943a4a696b6c7d1b71586d97609db12"
-
-# requirement of 'com_github_bazelbuild_buildtools'
-http_archive(
-    name = "com_google_protobuf",
-    sha256 = protobuf_sha,
-    strip_prefix = "protobuf-{version}".format(version = protobuf_version),
-    url = "https://github.com/protocolbuffers/protobuf/archive/v{version}.tar.gz".format(version = protobuf_version),
-)
-
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-
-protobuf_deps()
-
 http_archive(
     name = "com_github_bazelbuild_buildtools",
     strip_prefix = "buildtools-master",
@@ -158,9 +189,9 @@ http_archive(
 
 load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_proto_grpc_toolchains")
 
-rules_proto_grpc_toolchains()
-
 rules_proto_grpc_repos()
+
+rules_proto_grpc_toolchains()
 
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 

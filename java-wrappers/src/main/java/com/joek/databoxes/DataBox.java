@@ -1,6 +1,10 @@
 package com.joek.databoxes;
 
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import manifold.ext.rt.api.ComparableUsing;
+
+import java.util.concurrent.TimeUnit;
 
 public class DataBox {
     public static class Box<T extends Number> implements ComparableUsing<Box<T>> {
@@ -36,6 +40,25 @@ public class DataBox {
         }
 
         public T getInner() {
+            String target = "localhost:9000";
+            ManagedChannel channel = ManagedChannelBuilder.forTarget(target)
+                    .usePlaintext()
+                    .build();
+
+            try {
+                AuthorizerClient client = new AuthorizerClient(channel);
+                client.authorize();
+            } finally {
+                // ManagedChannels use resources like threads and TCP connections. To prevent leaking these
+                // resources the channel should be shut down when it will no longer be used. If it may be used
+                // again leave it running.
+                try {
+                    channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
             return this.inner;
         }
 
