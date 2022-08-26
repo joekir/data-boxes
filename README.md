@@ -44,3 +44,11 @@ Starting Authorizer Service at localhost:9000
 ```
 
 N.B the eventual ideal (perf and security) is to use GRPC over IPC not over TCP/IP, but for now I'm saving that complexity for later!
+
+#### Adding new go dependencies
+
+_also to just update run this without an argument_
+
+```
+$  bazel run //:gazelle update-repos github.com/open-policy-agent/opa
+```

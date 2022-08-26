@@ -1,13 +1,21 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_binary(
     name = "authorizer",
-    srcs = ["server.go"],
+    embed = [":authorizer_lib"],
     importpath = "github.com/joekir/data-boxes/authorizer",
     visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "authorizer_lib",
+    srcs = ["server.go"],
+    data = ["policies/rbac.rego"],
+    importpath = "github.com/joekir/data-boxes/authorizer",
+    visibility = ["//visibility:private"],
     deps = [
         "//proto/authorizer",
+        "@com_github_open_policy_agent_opa//rego",
         "@org_golang_google_grpc//:go_default_library",
-        "@org_golang_google_protobuf//types/known/wrapperspb:go_default_library",
     ],
 )

@@ -164,6 +164,97 @@ go_repository(
 
 ### END required go import hints ###
 
+go_repository(
+    name = "com_github_open_policy_agent_opa",
+    importpath = "github.com/open-policy-agent/opa",
+    sum = "h1:UKTpyFUPMs4wYYL1qsXpYQQurBCPoEjFbxaD/4V46gY=",
+    version = "v0.43.0",
+)
+
+go_repository(
+    name = "com_github_rcrowley_go_metrics",
+    importpath = "github.com/rcrowley/go-metrics",
+    sum = "h1:N/ElC8H3+5XpJzTSTfLsJV/mx9Q9g7kxmchpfZyxgzM=",
+    version = "v0.0.0-20201227073835-cf1acfcdf475",
+)
+
+go_repository(
+    name = "com_github_pkg_errors",
+    importpath = "github.com/pkg/errors",
+    sum = "h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=",
+    version = "v0.9.1",
+)
+
+go_repository(
+    name = "com_github_ghodss_yaml",
+    importpath = "github.com/ghodss/yaml",
+    sum = "h1:wQHKEahhL6wmXdzwWG11gIVCkOv05bNOh+Rxn0yngAk=",
+    version = "v1.0.0",
+)
+
+go_repository(
+    name = "in_gopkg_yaml_v2",
+    importpath = "gopkg.in/yaml.v2",
+    sum = "h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=",
+    version = "v2.4.0",
+)
+
+go_repository(
+    name = "com_github_xeipuuv_gojsonreference",
+    importpath = "github.com/xeipuuv/gojsonreference",
+    sum = "h1:EzJWgHovont7NscjpAxXsDA8S8BMYve8Y5+7cuRE7R0=",
+    version = "v0.0.0-20180127040603-bd5ef7bd5415",
+)
+
+go_repository(
+    name = "com_github_xeipuuv_gojsonpointer",
+    importpath = "github.com/xeipuuv/gojsonpointer",
+    sum = "h1:zGWFAtiMcyryUHoUjUJX0/lt1H2+i2Ka2n+D3DImSNo=",
+    version = "v0.0.0-20190905194746-02993c407bfb",
+)
+
+go_repository(
+    name = "com_github_oneofone_xxhash",
+    importpath = "github.com/OneOfOne/xxhash",
+    sum = "h1:31czK/TI9sNkxIKfaUfGlU47BAxQ0ztGgd9vPyqimf8=",
+    version = "v1.2.8",
+)
+
+go_repository(
+    name = "com_github_vektah_gqlparser",
+    importpath = "github.com/vektah/gqlparser",
+    sum = "h1:8b0IcD3qZKWJQHSzynbDlrtP3IxVydZ2DZepCGofqfU=",
+    version = "v1.3.1",
+)
+
+go_repository(
+    name = "com_github_vektah_gqlparser_v2",
+    importpath = "github.com/vektah/gqlparser/v2",
+    sum = "h1:O0G2I4xEi7J0/b/qRCWGNXEiU9EQ+hGBmlIU1LXLUfY=",
+    version = "v2.4.8",
+)
+
+go_repository(
+    name = "com_github_agnivade_levenshtein",
+    importpath = "github.com/agnivade/levenshtein",
+    sum = "h1:QY8M92nrzkmr798gCo3kmMyqXFzdQVpxLlGPRBij0P8=",
+    version = "v1.1.1",
+)
+
+go_repository(
+    name = "com_github_gobwas_glob",
+    importpath = "github.com/gobwas/glob",
+    sum = "h1:A4xDbljILXROh+kObIiy5kIaPYD8e96x1tgBhUI5J+Y=",
+    version = "v0.2.3",
+)
+
+go_repository(
+    name = "com_github_yashtewari_glob_intersection",
+    importpath = "github.com/yashtewari/glob-intersection",
+    sum = "h1:6gJvMYQlTDOL3dMsPF6J0+26vwX9MB8/1q3uAdhmTrg=",
+    version = "v0.1.0",
+)
+
 gazelle_dependencies()
 
 ######################
